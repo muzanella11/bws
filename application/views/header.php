@@ -18,9 +18,11 @@
 <script type="text/javascript">
 	site_url = '<?php echo site_url(); ?>'
 </script>
+
 <?php
 	echo $css.$js;
 ?>
+<link href="<?php echo site_url();?>stylesheet/font/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <?php

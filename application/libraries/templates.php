@@ -31,7 +31,7 @@ class Templates {
 	}
     function folder_css($css=""){
 		$data_css = '';
-		$css[] = "style.css";
+		$css[] = "reset.css";
 		foreach ($css as $key => $val){
 			$data_css .= "<link href=" . "http://".$_SERVER['HTTP_HOST'] . "/". $this->folder_css. $val ." rel='stylesheet' type='text/css'/>\n";	
 		}
