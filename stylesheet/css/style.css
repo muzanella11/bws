@@ -43,16 +43,8 @@ src:url(../font/font/Quadranta-Regular.otf);
  .link_signin:hover,.link_signup:hover{
 	color:skyblue;
  }
- body{
-	padding-top:0;
-	padding-bottom:0;
-	min-height:0;
- }
  .separator_top{
 	margin-top:50px;
- }
- .box_title_page{
-	text-align:center; margin-top:8%; font-family:PutjayBold; font-size:50px;
  }
  /********************************************/
  
