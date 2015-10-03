@@ -30,41 +30,45 @@ class Apps extends CI_Controller {
 	public function index()
 	{
 	   $this->data = new stdClass();
-	   if($this->session->userdata('user_id')){
-			$this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","navbar-fixed-top.css","carousel.css"));
+	   //if($this->session->userdata('user_id')){
+			$this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css"));
 			$this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
 
-			$this->data->title           = "Enem Apps";
-			$this->data->content_header 	= "templates/header/header_not_login";
-			$this->data->content_body    = 'templates/bws';
-			$this->data->content_footer    = '';
-			$this->data->no_image		=	$this->templates->no_avatar();
+			$this->data->title           	= "Enem Apps";
+			$this->data->content_header 	= "templates/enem_apps/header/enem_header";
+			$this->data->content_body    	= 'templates/enem_apps/enem_apps';
+			$this->data->content_footer    	= '';
+			$this->data->no_image			=	$this->templates->no_avatar();
 			//$this->load->model('user_model');
 
 
 				$this->load->view('header',$this->data);
 				$this->load->view('body');
 				$this->load->view('footer');
-	   } else {
-			redirect('apps/signin');
-	   }
+	   //} else {
+		//	redirect('apps/signin');
+	   //}
 	   
     }
 	public function Signin(){
 		//die('haha');
 		$this->data = new stdClass();
-		$this->data->css   = $this->templates->folder_css(array("bootstrap.min.css"));
+		$this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css"));
 		$this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
 		
 		$this->data->title = "Signin Enem Apps";
 		$this->data->content_header 	= "";
-		$this->data->content_body    = 'templates/admin/signin/enem_apps_signin';
+		$this->data->content_body    = 'templates/enem_apps/signin/enem_apps_signin';
 		$this->data->content_footer    = '';
 		$this->data->no_image		=	$this->templates->no_avatar();
 		
 		$this->load->view('header',$this->data);
 		$this->load->view('body');
 		$this->load->view('footer');
+	}
+	
+	public function Signout(){
+	
 	}
 	
 }
