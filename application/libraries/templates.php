@@ -65,6 +65,19 @@ class Templates {
 		$str_length	= strlen(trim($string));
 		return $str_length;
 	}
+    function enem_secret($pass){
+        $enem_pass = md5(sha1(md5($pass)));
+        return $enem_pass;
+    }
+    function anti_injection($var){
+        $enem_var = stripslashes(strip_tags(htmlspecialchars($var,ENT_QUOTES)));
+        return $enem_var;
+    }
+    function get_random_string($length){
+        $x ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $y = substr(str_shuffle($x),0,$length);
+        return $y;
+    }
 	/**
 	 * Index Page for this controller.
 	 *

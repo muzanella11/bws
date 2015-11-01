@@ -15,6 +15,43 @@
 		function __construct(){
 			parent::__construct();	
 		}
+        function addEnemTokenUserManagement($data){
+            $sql    =   "INSERT INTO enem_token_user_management (enem_token,enem_token_created,enem_token_status)
+                            VALUES('".$data['enem_token']."',now(),'".$data['enem_token_status']."')";
+            $this->db->query($sql);
+        }
+        function getDataTokenUserManagementByToken($token){
+			$sql    =   "SELECT * FROM enem_token_user_management WHERE enem_token='".$token."'";
+            $query  =   $this->db->query($sql);
+            if($query->num_rows() > 0){
+                return $query->result();
+            }
+		}
+        function offTokenUserManagement($token){
+            $status    =   "enem_token_status='0'";
+                
+            $sql       =   "UPDATE enem_token_user_management SET ".$status.", enem_token_off=now() WHERE enem_token ='".$token."'";
+            $this->db->query($sql);
+        }
+        function addEnemUserAdmin($data){
+            $sql    =   "INSERT INTO enem_user_admin (enem_username,enem_password,enem_email,enem_user_status,enem_date_user_created)
+                            VALUES('".$data['enem_username']."','".$data['enem_password']."','".$data['enem_email']."','".$data['enem_user_status']."',now())";
+            $this->db->query($sql);
+        }
+        function getDataEnemAdminByEmail($email){
+            $sql    =   "SELECT * FROM enem_user_admin WHERE enem_email='".$email."'";
+            $query  =   $this->db->query($sql);
+            if($query->num_rows() > 0){
+                return $query->result();
+            }
+        }
+        function getDataEnemAdminByUsername($username){
+            $sql    =   "SELECT * FROM enem_user_admin WHERE enem_username='".$username."'";
+            $query  =   $this->db->query($sql);
+            if($query->num_rows() > 0){
+                return $query->result();
+            }
+        }
 		function getDataAdminByEmail($email){
 			$sql    =   "SELECT * FROM enem_admin WHERE email='".$email."'";
             $query  =   $this->db->query($sql);
