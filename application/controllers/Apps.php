@@ -27,26 +27,45 @@ class Apps extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct(){
+    	parent::__construct();
+    	$this->data = new StdClass; 
+    	$this->load->library('templates');
+    	$this->load->model('user_model'); 
+    }
 	public function index()
 	{
-	   $this->data = new stdClass();
-	   //if($this->session->userdata('user_id')){
-			$this->data = new stdClass();
-            $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css"));
-    		$this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
-            
-            $this->data->title           	= "Enem Apps";
-            $this->data->content_navigation = "enem_apps/apps/navigation/enem_left_navigation";
-    		$this->data->content_header 	= "enem_apps/apps/header/enem_header";
-    		$this->data->content_body    	= "enem_apps/apps/dashboard/enem_dashboard";
-    		$this->data->content_footer    	= "";
-            
-            $this->load->view('enem_apps/apps_main',$this->data);
-	   //} else {
-		//	redirect('apps/signin');
-	   //}
+	   
+	   if($this->session->userdata('id_admin')){
+			if($this->session->userdata('step_one') === '0'){
+                redirect('apps/step_one');
+            }
+            else if($this->session->userdata('step_two') === '0'){
+                redirect('apps/step_two');
+            }
+            else {
+                $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css","animate.css"));
+        		$this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
+                
+                $this->data->title           	= "Enem Apps";
+                $this->data->content_navigation = "enem_apps/apps/navigation/enem_left_navigation";
+        		$this->data->content_header 	= "enem_apps/apps/header/enem_header";
+        		$this->data->content_body    	= "enem_apps/apps/dashboard/enem_dashboard";
+        		$this->data->content_footer    	= "";
+                
+                $enem_id = $this->session->userdata('id_admin');
+                $data_enem_admin = $this->user_model->getDataEnemAdminById($enem_id);
+                
+                $this->data->no_avatar = $this->templates->no_avatar();
+                
+                $this->load->view('enem_apps/apps_main',$this->data);
+            }
+	   } else {
+			redirect('apps/signin');
+	   }
 	   
     }
+    
     public function Slidingmenu(){
         $this->data = new stdClass();
         $this->load->view('enem_apps/apps_slidingmenu');
@@ -78,6 +97,7 @@ class Apps extends CI_Controller {
         
         $this->load->view('enem_apps/apps_main',$this->data);
     }
+    
     public function Enem_user_signin(){
         $this->data = new stdClass();
         $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css","animate.css"));
@@ -91,6 +111,7 @@ class Apps extends CI_Controller {
         
         $this->load->view('enem_apps/apps_main',$this->data);
     }
+    
     public function Enem_user_signout(){
         //$this->session->sess_destroy();
         //die(var_dump($this->session->userdata()));
@@ -109,6 +130,7 @@ class Apps extends CI_Controller {
             redirect('');
 		}
     }
+    
     public function Create_enem_user(){
         $this->data = new stdClass();
         $this->load->model('user_model');
@@ -131,25 +153,77 @@ class Apps extends CI_Controller {
         	redirect('apps/enem_user_signin');
         }
     }
+    
 	public function Signin(){
 		//die('haha');
-		$this->data = new stdClass();
-		$this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css"));
-		$this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
-		
-		$this->data->title = "Signin Enem Apps";
-		$this->data->content_header 	= "";
-		$this->data->content_body    = 'templates/enem_apps/signin/enem_apps_signin';
-		$this->data->content_footer    = '';
-		$this->data->no_image		=	$this->templates->no_avatar();
-		
-		$this->load->view('header',$this->data);
-		$this->load->view('body');
-		$this->load->view('footer');
+		if(!$this->session->userdata('id_admin')){
+            $this->data = new stdClass();
+            $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css","animate.css"));
+            $this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
+            
+            $this->data->title = "Signin Enem Apps";
+            $this->data->content_navigation = '';
+            $this->data->content_header 	= "";
+            $this->data->content_body    = 'enem_apps/apps/signin/enem_apps_signin';
+            $this->data->content_footer    = '';
+            $this->data->no_avatar		=	$this->templates->no_avatar();
+            
+            $this->load->view('enem_apps/apps_main',$this->data);
+		} else {
+		  redirect('apps');
+		}
 	}
+    
+    public function Step_one(){
+        //die('step one');
+        $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css","animate.css"));
+        $this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
+        
+        $this->data->title = "Enem Apps Step One";
+        $this->data->content_navigation = '';
+        $this->data->content_header 	= "";
+        $this->data->content_body    = 'enem_apps/apps/wizard/enem_apps_step_one';
+        $this->data->content_footer    = '';
+        $this->data->no_avatar		=	$this->templates->no_avatar();
+        
+        $this->load->view('enem_apps/apps_main',$this->data);
+    }
+    
+    public function Step_two(){
+        //die('step one');
+        $this->data->css   = $this->templates->folder_css(array("bootstrap.min.css","enem_apps.css","animate.css"));
+        $this->data->js    = $this->templates->folder_js(array("bootstrap.min.js"));
+        
+        $this->data->title = "Enem Apps Step Two";
+        $this->data->content_navigation = '';
+        $this->data->content_header 	= "";
+        $this->data->content_body    = 'enem_apps/apps/wizard/enem_apps_step_two';
+        $this->data->content_footer    = '';
+        $this->data->no_avatar		=	$this->templates->no_avatar();
+        
+        $this->load->view('enem_apps/apps_main',$this->data);
+    }
 	
 	public function Signout(){
-	
+	   if($this->session->userdata('id_admin')){
+	       $enem_id = $this->session->userdata('id_admin');
+           $data_user = $this->user_model->getDataEnemAdminById($enem_id);
+           
+           $data_session   =   array(
+					'id_admin'           	  =>  $data_user[0]->id_enem_user,
+					'name'          	  	  =>  $data_user[0]->enem_name,
+					'username'       		  =>  $data_user[0]->enem_username,
+					'email'					  =>  $data_user[0]->enem_email,
+					'status_admin'            =>  $data_user[0]->enem_user_status,
+                    'step_one'                =>  $data_user[0]->enem_step_one,
+                    'step_two'                =>  $data_user[0]->enem_step_two,
+			);
+			$this->session->set_userdata($data_session);
+            
+            redirect('apps/signin');
+	   } else {
+	       redirect('apps/signin');
+	   }
 	}
 	
 }

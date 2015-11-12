@@ -27,6 +27,13 @@ class Ajax extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct(){
+    	parent::__construct();
+    	$this->data = new StdClass; 
+    	$this->load->library('templates');
+    	$this->load->model('user_model'); 
+    }
+    
 	public function index()
 	{
 		redirect('');
@@ -198,8 +205,8 @@ class Ajax extends CI_Controller {
 	public function signin_apps(){
 		if($this->input->is_ajax_request()){
 			$this->load->model('user_model');
-			$variabel = htmlspecialchars($this->input->post('var'));
-			$pass	=	htmlspecialchars($this->input->post('pass'));
+			$variabel = $this->templates->anti_injection($this->input->post('var'));
+			$pass	  =	$this->templates->enem_secret($this->templates->anti_injection($this->input->post('pass')));
 			
 			if(empty($variabel)){
 				$dataJson['message']    =   'Masukkan Email atau Username';
@@ -207,7 +214,7 @@ class Ajax extends CI_Controller {
 				$dataJson['id']         =   'variabel';
 			}
 			else if(strpos($variabel,'@')){
-				$data_user = $this->user_model->getDataAdminByEmail($variabel);
+				$data_user = $this->user_model->getDataEnemAdminByEmail($variabel);
 				if(empty($data_user)){
 					$dataJson['message']    =   'Email salah';
 					$dataJson['t']          =   0;
@@ -218,7 +225,7 @@ class Ajax extends CI_Controller {
 					$dataJson['t']          =   0;
 					$dataJson['id']         =   'password';
 				}
-				else if($pass != $data_user[0]->password){
+				else if($pass != $data_user[0]->enem_password){
 					$dataJson['message']    =   'Password Salah';
 					$dataJson['t']          =   0;
 					$dataJson['id']         =   'password';
@@ -226,7 +233,7 @@ class Ajax extends CI_Controller {
 					$dataJson['t'] = 1;
 				}
 			} else {
-				$data_user = $this->user_model->getDataAdminByUsername($variabel);
+				$data_user = $this->user_model->getDataEnemAdminByUsername($variabel);
 				if(empty($data_user)){
 					$dataJson['message'] = 'Username salah';
 					$dataJson['t']		 = 0;
@@ -237,7 +244,7 @@ class Ajax extends CI_Controller {
 					$dataJson['t']          =   0;
 					$dataJson['id']         =   'password';
 				}
-				else if($pass != $data_user[0]->password){
+				else if($pass != $data_user[0]->enem_password){
 					$dataJson['message']    =   'Password Salah';
 					$dataJson['t']          =   0;
 					$dataJson['id']         =   'password';
@@ -250,11 +257,13 @@ class Ajax extends CI_Controller {
 			if($dataJson['t'] == 1){
 				// Kalo udah Login
 				$data_session   =   array(
-						'id_admin'           	  =>  $data_user[0]->id_admin,
-						'name'          	  	  =>  $data_user[0]->name,
-						'username'       		  =>  $data_user[0]->username,
-						'email'					  =>  $data_user[0]->email,
-						'status_admin'            =>  $data_user[0]->status_admin
+						'id_admin'           	  =>  $data_user[0]->id_enem_user,
+						'name'          	  	  =>  $data_user[0]->enem_name,
+						'username'       		  =>  $data_user[0]->enem_username,
+						'email'					  =>  $data_user[0]->enem_email,
+						'status_admin'            =>  $data_user[0]->enem_user_status,
+                        'step_one'                =>  $data_user[0]->enem_step_one,
+                        'step_two'                =>  $data_user[0]->enem_step_two,
 				);
 				$this->session->set_userdata($data_session);
 			}
@@ -263,6 +272,20 @@ class Ajax extends CI_Controller {
 			redirect('apps/signin');
 		}
 	}
+    
+    public function check_step_one(){
+        if($this->input->is_ajax_request()){
+            $enem_name = $this->input->post('data_enem_ex');
+            if(empty($enem_name)){
+                $dataJson['message']    =   'Masukkan nama lengkap';
+				$dataJson['t']          =   0;
+				$dataJson['id']         =   'name';
+            }
+            echo json_encode($dataJson);
+        } else {
+            redirect('');
+        }
+    }
 }
 
 /* End of file welcome.php */

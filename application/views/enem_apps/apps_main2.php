@@ -56,26 +56,22 @@
 <?php
     if($content_navigation){
 ?>
-$(".enem_menu_nav").click(function(){
+$(".menu_nav").click(function(){
     enem_ex = $(this).attr("data-menu");
     //alert(enem_ex);
     if(enem_ex == 'menu_hidden'){
         $(this).attr("data-menu","menu_open");
-        $('.enem_menu_left').animate({
-          left: "0px"
-        }, 300);
-        $('body').animate({
-          left: "285px"
-        }, 300);
+        $(".main_nav").removeClass("menu_close");
+        $(".main_nav").addClass("menu_open");
+        $(".page_wrap").removeClass("page_slide_normal");
+        $(".page_wrap").addClass("page_slide");
     }
     if(enem_ex == 'menu_open'){
         $(this).attr("data-menu","menu_hidden");
-        $('.enem_menu_left').animate({
-          left: "-285px"
-        }, 300);
-        $('body').animate({
-          left: "0px"
-        }, 300);
+        $(".main_nav").removeClass("menu_open");
+        $(".main_nav").addClass("menu_close");
+        $(".page_wrap").removeClass("page_slide");
+        $(".page_wrap").addClass("page_slide_normal");
     }
 });
 <?php } ?>

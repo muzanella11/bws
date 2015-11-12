@@ -23,8 +23,10 @@ class Templates {
     function __construct(){
         $this->folder_css   		= "/stylesheet/css/";
 		$this->folder_js    		= "/stylesheet/javascript/";
-		$this->folder_image 		= "http://". $_SERVER['HTTP_HOST'] ."/" . $this->path . "stylesheet/images/";
-		$this->folder_image_default = "http://". $_SERVER['HTTP_HOST'] ."/" . $this->path . "stylesheet/image/default_avatar/";
+        $this->folder_image 		= "http://". $_SERVER['HTTP_HOST'] ."/" . "stylesheet/images/";
+		$this->folder_image_default = "http://". $_SERVER['HTTP_HOST'] ."/" . "stylesheet/image/default_avatar/";
+		//$this->folder_image 		= "http://". $_SERVER['HTTP_HOST'] ."/" . $this->path . "stylesheet/images/";
+		//$this->folder_image_default = "http://". $_SERVER['HTTP_HOST'] ."/" . $this->path . "stylesheet/image/default_avatar/";
 		$this->image_dir			= $_SERVER['DOCUMENT_ROOT'] . "/" . $this->path . "stylesheet/images/";
 		$this->us_img_dir			= $_SERVER['DOCUMENT_ROOT'] . "/" . $this->path . "media/";
 		$this->us_img_path			= "http://". $_SERVER['HTTP_HOST'] ."/". $this->path . "media/";

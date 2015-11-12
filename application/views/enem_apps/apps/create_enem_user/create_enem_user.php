@@ -17,8 +17,8 @@ body{
     <div class="wrapper_enem_user_create animated bounceIn" style="animation-duration: 3000ms;">
         <div style="position: relative; width: 100%; padding: 10px;">
             <div class="enem_box_title_center box_title_custom">Create Enem User</div>
-            <div style="padding:11px;position:relative;max-height: 380px;width:100%;">
-                <div style="position: relative; width:500px; margin: auto;">
+            <div style="padding:11px;position:relative;width:100%; margin: auto;">
+                <div style="position: relative; width:100%; ">
                     <form class="enem_form">
                         <div style="position: relative; width: 100%; ">
                             <input name="email" class="animated enem_input enem_input_email" style="padding: 11px; width: 100%;" placeholder="Enter email" />
@@ -54,6 +54,9 @@ body{
                 </div>
             </div>
             <div id="timer" style="position: absolute; right:0; bottom:0; background: skyblue; padding:8px; color: white; text-align: center;"></div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
 var enem_status_online = 600;
 setInterval(function(){
@@ -127,6 +130,3 @@ $('.enem_create').click(function() {
 		return false;
 });
 </script>
-        </div>
-    </div>
-</div>

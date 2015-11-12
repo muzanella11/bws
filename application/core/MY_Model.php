@@ -52,27 +52,26 @@
                 return $query->result();
             }
         }
-		function getDataAdminByEmail($email){
-			$sql    =   "SELECT * FROM enem_admin WHERE email='".$email."'";
+        function getDataEnemAdminById($id){
+            $sql    =   "SELECT * FROM enem_user_admin WHERE id_enem_user='".$id."'";
             $query  =   $this->db->query($sql);
             if($query->num_rows() > 0){
                 return $query->result();
             }
-		}
-		function getDataAdminByUsername($username){
-			$sql    =   "SELECT * FROM enem_admin WHERE username='".$username."'";
-            $query  =   $this->db->query($sql);
-            if($query->num_rows() > 0){
-                return $query->result();
-            }
-		}
-		function getDataAdminById($id){
-			$sql    =   "SELECT * FROM enem_admin WHERE id_admin='".$id."'";
-            $query  =   $this->db->query($sql);
-            if($query->num_rows() > 0){
-                return $query->result();
-            }
-		}
+        }
+        function updateStepOne($data){
+            $enem_name = "enem_name=".$data['enem_name']."";
+            $enem_step_one = "enem_step_one='1'";
+            
+            $sql       =   "UPDATE enem_user_admin SET ".$enem_name.", ".$enem_step_one." WHERE id_enem_user ='".$data['enem_id']."'";
+            $this->db->query($sql);
+        }
+        function updateStepTwo($data){
+            $enem_step_one = "enem_step_two='1'";
+            
+            $sql       =   "UPDATE enem_user_admin SET ".$enem_step_one." WHERE id_enem_user ='".$data['enem_id']."'";
+            $this->db->query($sql);
+        }
 		function addNewItems($data){
 			$sql    =   "INSERT INTO items (nama,kategori,harga,deskripsi,date_create)
                             VALUES('".$data['nama']."','".$data['category']."','".$data['price']."','".$data['description']."',now())";

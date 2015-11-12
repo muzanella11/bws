@@ -15,11 +15,11 @@ body{
 </style>
 
 <div class="container_enem_user_create">
-    <div class="wrapper_enem_user_create animated bounceIn" style="width:400px; animation-duration: 3000ms;">
-        <div style="position: relative; width: 100%; padding: 90px 25px;">
+    <div class="wrapper_enem_user_create animated bounceIn" style="position:relative; animation-duration: 3000ms;">
+        <div style="position: relative; width: 100%; padding: 80px 11px;">
             <div class="enem_box_title_center box_title_custom">Signin Enem</div>
-            <div class="enem_container_box_login" style="padding:11px;position:relative;max-height: 380px;width:100%;">
-                <div class="enem_box_form" style="position: relative; width:300px; margin: auto;">
+            <div class="enem_container_box_login" style="padding:11px;position:relative;width:100%;">
+                <div class="enem_box_form" style="position: relative; width:100%;">
                     <form class="enem_form">
                         <div style="position: relative; width: 100%; ">
                             <input class="animated enem_input_username" type="text" name="username" style="padding: 11px; width: 100%; animation-duration: 1111ms;" placeholder="Enter username" />
@@ -39,6 +39,11 @@ body{
         </div>
     </div>
 </div>
+<!--<div class="container_enem_user_create">
+ <div style="position:relative; width: 300px; background: white; min-height: 300px; margin: auto;">
+    <div class="enem_col_12  enem_col_12_sml enem_no_padding">asdasd</div>
+ </div>
+</div>-->
 <script>
 $('.enem_form').submit(function(e) {
         $(".shake").removeClass("shake");
