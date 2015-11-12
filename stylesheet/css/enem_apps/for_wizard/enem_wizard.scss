@@ -1,0 +1,29 @@
+@import '../mixin';
+@import '../variable';
+.enem_wrapper_wizard{
+	position: relative; width: 100%; padding: 20px;
+}
+.enem_box_content_wizard{
+	position:relative; width:700px; height: 500px; padding:25px; background: white; margin:auto; top: 90px; border-radius:3px;
+}
+.enem_wrapper_box_content_wizard{
+	position: relative; width:300px; margin:auto;
+}
+.enem_box_title_wizard{
+	position: relative; width:100%; padding: 11px; font-size: 2em; border-bottom: 3px solid rgba(0,0,0,0.1); margin-bottom: 30px; text-align: center;
+}
+.enem_avatar_wizard{
+	position: relative; margin: auto; width: 200px; height:200px; border-radius: 50%;
+}
+.enem_wrapper_box_name_wizard{
+	position: relative; width:100%; margin-top: 11px;
+}
+.enem_box_name_wizard{
+	position: relative; width:100%;
+}
+.enem_wrapper_button_wizard{
+	position: relative; width:100%; margin-top: 11px;
+}
+.enem_box_button_wizard{
+	position: relative; width:100%;
+}

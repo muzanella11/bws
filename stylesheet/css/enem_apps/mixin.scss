@@ -1,0 +1,124 @@
+@mixin border_radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box_shadow($shadow, $shadow_color){
+	 -webkit-box-shadow: $shadow $shadow_color;
+		-moz-box-shadow: $shadow $shadow_color;
+		 -ms-box-shadow: $shadow $shadow_color;
+		  	 box-shadow: $shadow $shadow_color;
+}
+
+@mixin transform($transform){
+	 -webkit-transform: $transform;
+		-moz-transform: $transform;
+		 -ms-transform: $transform;
+		  	 transform: $transform;
+}
+
+@mixin transition($transition){
+	 -webkit-transition: $transition;
+		-moz-transition: $transition;
+		 -ms-transition: $transition;
+		  	 transition: $transition;
+}
+
+@mixin create_animation($name_animation,$duration){
+    -webkit-animation:$name_animation $duration infinite;
+    -moz-animation:$name_animation $duration infinite;
+    animation:$name_animation $duration infinite;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@mixin create_gradien_with_direction($direction,$color1,$color2){
+    background: -webkit-linear-gradient($direction, $color1, $color2); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient($direction, $color1, $color2); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient($direction, $color1, $color2); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to $direction, $color1, $color2); /* Standard syntax */
+}
+
+@mixin create_enem_background_cover{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+@mixin create_box_title{
+    position: relative; width: 100%; font-size: 2.5em;
+}
+@mixin create_box_title_center{
+    @include create_box_title;
+    text-align: center;
+}
+@mixin w100_relative(){
+    position:relative;
+    width:100%;
+}
+@mixin create_arrow_up($border,$color){
+	width: 0; 
+	height: 0; 
+	border-left: $border solid transparent;
+	border-right: $border solid transparent;
+	
+	border-bottom: $border solid $color;
+}
+
+@mixin create_arrow_down($border,$color){
+	width: 0; 
+	height: 0; 
+	border-left: $border solid transparent;
+	border-right: $border solid transparent;
+	
+	border-top: $border solid $color;
+}
+
+@mixin create_arrow_right($border,$color){
+	width: 0; 
+	height: 0; 
+	border-top: $border solid transparent;
+	border-bottom: $border solid transparent;
+	
+	border-left: $border solid $color;
+}
+
+@mixin create_arrow_left($border,$color){
+	width: 0; 
+	height: 0; 
+	border-top: $border solid transparent;
+	border-bottom: $border solid transparent; 
+	
+	border-right:$border solid $color; 
+}
+
+@mixin create_enem_separator($height_separator){
+    position: relative;
+    width: 100%;
+    height: $height_separator;
+}
+
+@mixin create_enem_grid_12{
+    float: left;
+    position: relative;
+    min-height: 11px;
+}
+@mixin create_padding_for_grid{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@mixin create_enem_row{
+    position: relative;
+    width: 100%;
+    margin: 0 20px;
+}
+
+@mixin create_enem_input($border,$padding){
+    border:$border;
+    padding:$padding;
+    outline:none;
+}
